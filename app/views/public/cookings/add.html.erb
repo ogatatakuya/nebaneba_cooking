@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-3 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">追加料理投稿フォーム</span></h4>
+    </div>
+  </div>
+  <% if @cooking.errors.any? %>
+  <%= @cooking.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @cooking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+ <div class="row mt-5">
+    <div class="col-md-7 offset-md-2">
+    
+            <%= form_with model: @cooking, url: cookings_path, multipart: true do |f| %>
+            <table class="table">
+              <tr>
+                <td><%= f.label :images, "料理画像"%></td>
+                <td><%= f.file_field :images, accept: "image/*" %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :introduction, "概要欄"%></td>
+                <td><%= f.text_area :introduction, placeholder: "レシピなどを書き込んで下さい。", style: "width:400px;" %></td>
+              </tr>
+             
+              <tr>
+                <td></td>
+                
+                <td><%#= f.hidden_field :id, :value => @cooking.id %>
+                <%#= f.hidden_field :name, :value => @cooking.name %>
+                <%= f.hidden_field :image, :value => @cooking.image %>
+                <%= f.hidden_field :images, :value => @cooking.images %>
+                <%= f.hidden_field :tag_id, :value => @cooking.tag_id %>
+                <%= f.hidden_field :introduction, :value => @cooking.introduction %>
+                <%= f.submit '投稿する', class:"btn btn-lg btn-success", style: "border-radius: 10px;" %></td>
+              </tr>
+            </table>
+            <% end %>
+            
+      </div>
+    </div>
+  </div>
+</div>
+<%# @cookings.each do |cooking| %>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td><%= cooking.id %></td>
+      <td><%= link_to admin_cooking_path(cooking.id) do %>
+               <% if cooking.image.attached? %>
+                 <%= image_tag cooking.image, :siza =>'30x30' %>
+               <% end %>
+               
+          <% end %></td>
+      <td><%= cooking.name %></td>
+      <td><%= cooking.member.name %></td>
+      <td><%= cooking.tag.name %></td>
+    </tr>
+  </tbody>
+</table>
+<% end %>
+<% @cookings.each do |cooking| %>
+          <tr style="display:flex; flex-wrap: wrap;">
+            <td>
+              <%= link_to cooking_path(cooking.id) do %>
+                <% if cooking.image.attached? %>
+                  <%= image_tag cooking.image, :size =>'100x100' %></br>
+                <% end %>
+                <h4><%= cooking.name %></h4>
+              <% end %>
+              </td>
+          </tr>
+          <% end %>

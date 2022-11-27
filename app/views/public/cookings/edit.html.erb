@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-3 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">料理編集フォーム</span></h4>
+    </div>
+  </div>
+  <% if @cooking.errors.any? %>
+  <%= @cooking.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @cooking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+ <div class="row mt-5">
+    <div class="col-md-7 offset-md-2">
+    
+            <%= form_with model: @cooking,url: cooking_path do |f| %>
+            <table class="table">
+              <tr>
+                <td><%= f.label :image, "料理画像"%></td>
+                <td><%= f.file_field :image, accept: "image/*" %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :name, "料理名"%></td>
+                <td><%= f.text_field :name, class: "form-control", style: "width:400px;" %></td>
+              </tr>
+              
+              <tr>
+                <td><%= f.label :tag, "タグ設定"%></td>
+                <td><%= f.collection_select(:tag_id, @tags, :id, :name)  %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :introduction, "概要欄"%></td>
+                <td><%= f.text_area :introduction, placeholder: "一言や材料などを書き込んで下さい。", style: "width:400px;" %></td>
+              </tr>
+             
+              <tr>
+                <td></td>
+                <td class="text-center"><%= f.submit '投稿する', class:"btn btn-lg btn-success", style: "border-radius: 10px;" %></td>
+              </tr>
+            </table>
+            <% end %>
+            
+      </div>
+    </div>
+  </div>
+</div>

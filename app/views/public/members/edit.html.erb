@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-5 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">
+        <%= @member.name %>さんの会員情報編集</span></h4>
+    </div>
+  </div>
+  <% if @member.errors.any? %>
+  <%= @member.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-1">
+        <%= form_with model: @member,url: member_path do |f| %>
+          <table class="table">
+             <tr>
+               <td><%= f.label :profile_image, "プロフィール画像"%></td>
+               <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+             </tr>
+             <tr>
+                <td><%= f.label :name, "氏名"%></td>
+                <td><%= f.text_field :name %></td>
+             </tr>
+              <tr>
+                <td><%= f.label :email, "メールアドレス"%></td>
+                <td><%= f.email_field :email %></td>
+              </tr>
+              
+              <tr>
+                <td><%= link_to "退会する", member_quit_path(@member.id), class:"btn btn-md btn-danger" %></td>
+                <td><%= f.submit '変更を保存', class:"btn btn-md btn-success" %></td>
+              </tr>
+          </table>
+        <% end %>
+    </div>
+  </div>
+</div>

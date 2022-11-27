@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-5 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">
+        <%= @member.name %>さんの会員詳細</span></h4>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-10 offset-md-1">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= image_tag @member.get_profile_image(100,100) %></td>
+          </tr>
+          <tr>
+            <td>氏名</td>
+            <td><%= @member.name %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @member.email %></td>
+          </tr>
+         
+          <tr>
+            <td></td>
+            <td>
+                <%= link_to "編集する", edit_member_path(@member), class:"btn btn-md btn-success", style:"border-radius: 5px;" %>
+            </td>
+            <td><%= link_to "ブックマーク一覧へ", cooking_bookmarks_path(:bookmark_id), class:"btn btn-md btn-primary", style:"border-radius: 5px;" %></td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-10">
+      <% @cookings.each do |cooking| %>
+      <div style="display:flex; flex-wrap: wrap;">
+        <div style="padding-left:20px; padding-right:20px;">
+          <%= link_to cooking_path(cooking.id) do %>
+            <% if cooking.image.attached? %>
+              <%= image_tag cooking.image, :size =>'200x200' %></br>
+            <% end %>
+            <h4><%= cooking.name %></h4>
+          <% end %>
+        </div>
+      <% end %>  
+      </div>
+    </div>  
+  </div>    
+</div>

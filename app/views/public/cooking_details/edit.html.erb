@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-5 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">追加料理過程編集フォーム</span></h4>
+    </div>
+  </div>
+  <% if @cooking_detail.errors.any? %>
+  <%= @cooking_detail.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @cooking_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+ <div class="row mt-5">
+    <div class="col-md-7 offset-md-2">
+    
+            <%= form_with model: @cooking_detail, url: cooking_cooking_detail_path(@cooking_detail.cooking_id, @cooking_detail.id) do |f| %>
+            <table class="table">
+              <tr>
+                <td><%= f.label :image, "料理画像"%></td>
+                <td><%= f.file_field :image, accept: "image/*" %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :introduction, "概要欄"%></td>
+                <td><%= f.text_area :introduction, placeholder: "レシピなどを書き込んで下さい。", style: "width:400px;" %></td>
+              </tr>
+             
+              <tr>
+                <td></td>
+                
+                <td>
+                <%= f.submit '編集する', class:"btn btn-lg btn-success", style: "border-radius: 10px;" %></td>
+              </tr>
+            </table>
+            <% end %>
+            
+      </div>
+    </div>
+  </div>
+</div>

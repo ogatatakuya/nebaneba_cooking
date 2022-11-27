@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-12 offset-3">
+      <%= image_tag 'no_image.jpg', :size =>'500x300' %>納豆
+    </div>
+  </div>
+ 
+  <div class="row mt-5">
+    <div class="col-12" >
+      <div style="display:flex; flex-wrap: wrap;">
+       <% @cookings.each do |cooking| %>
+        
+          <div style="padding-left:40px; padding-right:40px;">
+            <%= link_to cooking_path(cooking.id) do %>
+              <% if cooking.image.attached? %>
+                <%= image_tag cooking.image, :size =>'180x180' %></br>
+              <% end %>
+                <h5><%= cooking.name %></h5>
+             <% end %>
+          </div>
+       
+       <% end %>
+      
+       
+      </div>
+      
+    </div>
+    
+      
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-6 offset-md-5">
+      <div class="text-right"><%= link_to "一覧へ", cookings_path, class:"btn btn-primary" %></div>
+    </div>
+  </div>
+  
+</div>

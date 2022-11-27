@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-2 offset-md-1">
+    <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">会員一覧</span></h4>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-10 offset-md-1">
+    <table class="table">
+      <thead>
+        <tr style="background-color:whitesmoke;">
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= member.id %></td>
+            <td>
+              <%= link_to member.name, admin_member_path(member.id) %>
+                
+              
+            </td>
+            <td><%= member.email %></td>
+            <% if member.is_deleted == true %>
+            <td style="color:gray;">退会済</td>
+            <% else %>
+            <td style="color:green;">有効</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-6 offset-md-5">
+      <div class="text-center"><%#= paginate @memders %></div>
+    </div>
+  </div>
+</div>

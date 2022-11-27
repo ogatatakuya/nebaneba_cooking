@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-3 offset-md-2">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">新規会員登録</span></h4>
+    </div>
+  </div>
+ <div class="row mt-5">
+    <div class="col-md-10 offset-md-1">
+
+      <%= form_with model: @member, url: member_registration_path do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+      <table class="table">
+        <tr>
+          <td><%= f.label :name, "名前"%></td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :email, "メールアドレス" %></td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :password, "パスワード" %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> 文字以上)</em>
+              <% end %>
+              </td>
+          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :password_confirmation, "パスワード(確認用)" %></td>
+          <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit '新規登録', class:"btn btn-md btn-success", style:"width:170px; height:40px;" %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+ </div>
+ <div class="row mt-2 mb-5">
+   <div class="col-md-8 offset-md-2">
+     <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">既に登録済みの方</span></h4>
+     <%= link_to "こちら", member_session_path %>  からログインしてください。
+   </div>
+ </div>
+</div>
+
+

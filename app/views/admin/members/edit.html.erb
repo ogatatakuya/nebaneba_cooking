@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-5 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;">
+        <%= @member.name %>さんの会員情報編集</span></h4>
+    </div>
+  </div>
+  <% if @member.errors.any? %>
+  <%= @member.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-1">
+        <%= form_with model: @member,url: admin_member_path do |f| %>
+          <table class="table">
+             
+             <tr>
+                <td><%= f.label :name, "氏名"%></td>
+                <td><%= f.text_field :name %></td>
+             </tr>
+              <tr>
+                <td><%= f.label :email, "メールアドレス"%></td>
+                <td><%= f.email_field :email %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :is_deleted, "退会ステータス"%></td>
+                <td><%= f.radio_button :is_deleted, :false  %>有効</td>
+                <td><%= f.radio_button :is_deleted, :true  %>退会</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><%= f.submit '変更を保存', class:"btn btn-md btn-success" %></td>
+              </tr>
+          </table>
+        <% end %>
+    </div>
+  </div>
+</div>

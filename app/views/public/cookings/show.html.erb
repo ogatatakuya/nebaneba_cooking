@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-1">
+      <h4><span class="pr-4 pl-4" style="background-color:whitesmoke;"><%= @cooking.name %></span></h4>
+      <% if @cooking.bookmarked_by?(current_member) %>
+        <%= link_to "ブックマークを外す", cooking_bookmark_path(@cooking), method: :delete %>
+      <% else %>
+        <%= link_to "ブックマークをする", cooking_bookmarks_path(@cooking), method: :cooking %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-3">
+      <%= image_tag @cooking.image, :size =>'300x300' %>
+    </div>
+    <div class="col-6 offset-1">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= @cooking.name %></td>
+          </tr>
+          <tr>
+            <% if @member.is_deleted == true %>
+            <td><%= @cooking.member.name %><span style="color:red;">（退会済会員です）</span></td>
+            <% else %>
+            <td><%= @cooking.member.name %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td><%= @cooking.tag.name %></td>
+          </tr>
+          <tr>
+            <td><%= @cooking.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+    <div class="col-2">
+      <div style="flex-direction:column;">
+        <% if @cooking.member == current_member %>
+          <%= link_to "編集", edit_cooking_path(@cooking), class:"btn btn-lg btn-success", style: "border-radius: 10px;" %></br>
+          <%= link_to "削除", cooking_path(@cooking), data: {confirm: '本当に削除しますか？'}, method: :delete, class:"btn btn-lg btn-danger", style: "border-radius: 10px;" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-8">
+      <div class="border" style="padding:10px;">
+        <%= @cooking.introduction %>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-10">
+      <% if @cooking.member == current_member %>
+        <% @cooking_details.each do |cooking_detail| %>
+        <div style="display:flex;">
+          <% if cooking_detail.image.attached? %>
+            <%= image_tag cooking_detail.image, size:'200x200' %>
+          <% end %>
+          <div class="border" style="padding:10px; width:500px;">
+            <%= cooking_detail.introduction %>
+          </div>
+          <div>
+            <%= link_to "編集", edit_cooking_cooking_detail_path(@cooking,cooking_detail), class:"btn btn-lg btn-success", style: "border-radius: 10px; height:50px;" %></br>
+        
+            <%= link_to "削除", cooking_cooking_detail_path(@cooking,cooking_detail), method: :delete, class:"btn btn-lg btn-danger", style: "border-radius: 10px; height:50px;" %></br>
+          </div>
+        </div>
+        <% end %>
+        <%= link_to "まだ追加する", new_cooking_cooking_detail_path(@cooking), class:"btn btn-lg btn-primary", style: "border-radius: 10px;" %>
+      <% end %>
+    </div>
+    
+  </div>
+  <div class="row mt-5 mb-5">
+    <div class="col-10">
+      <p>コメント件数：<%= @cooking.cooking_comments.count %></p>
+      <% @cooking_comments.each do |comment| %>
+        <div style="display:flex;">
+          <% if comment.member == current_member %>
+          <%# if comment.member.id == @cooking.member.id %>
+            <%= link_to '削除', cooking_cooking_comment_path(@cooking, comment), data: {confirm: '本当に削除しますか？'}, method: :delete,
+              class:"btn-sm btn-danger", style: "border-radius: 10px; height:35px;" %>
+          <% end %>
+          <%= image_tag comment.member.get_profile_image(50,50) %>
+          <h6 style="line-height:50px;">投稿者:<%= comment.member.name %></h6>
+          <div style="padding-left:50px; line-height:50px;">
+            <%= simple_format(comment.comment) %>
+          </div> 
+        </div>
+        
+        
+      <% end %>
+      <% if member_signed_in? %>
+        <%= form_with model: [@cooking, @cooking_comment], local: true do |f| %>
+          <%= f.text_area :comment, style: "width:600px;" %>
+          <%= f.submit "投稿", class:"btn btn-lg btn-success" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
