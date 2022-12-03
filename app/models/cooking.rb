@@ -12,7 +12,7 @@ class Cooking < ApplicationRecord
   
   
   
-  validates :image, presence: true
+  #validates :image, presence: true
   validates :name, presence: true
   validates :introduction, presence: true
   

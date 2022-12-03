@@ -18,6 +18,7 @@
             <%= form_with model: @cooking, local: true  do |f| %>
             <table class="table">
               <div>
+                
                 <td><%= f.label :image, "料理画像"%></td>
                 <td><%= f.file_field :image, accept: "image/*" %></td>
               </div>

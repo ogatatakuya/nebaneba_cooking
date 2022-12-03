@@ -39,6 +39,8 @@
             <%= link_to cooking_path(cooking.id) do %>
               <% if cooking.image.attached? %>
                 <%= image_tag cooking.image, :size =>'200x200' %></br>
+              <% else %>
+                <%= image_tag asset_path("default-image.jpg"), :size =>'200x200' %></br>
               <% end %>
               <h4><%= cooking.name %></h4>
             <% end %>
