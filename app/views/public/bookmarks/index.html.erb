@@ -19,11 +19,11 @@
         <tr style="line-height:50px;">
           <td>
             <%= link_to cooking_path(bookmark.cooking) do %>
-              <%# if @cooking.image.attached? %>
+              <% if bookmark.cooking.image.attached? %>
                 <%= image_tag bookmark.cooking.image %>
-              <%# else %>
-                <%#= image_tag asset_path("default-image.jpg"), :size =>'100x100' %>
-              <%# end %>
+              <% else %>
+                <%= image_tag asset_path("default-image.jpg"), :size =>'100x100' %>
+              <% end %>
             <% end %>
           </td>
           <td>
