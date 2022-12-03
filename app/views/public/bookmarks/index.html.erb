@@ -9,8 +9,8 @@
     <thead>
       <tr>
         <th></th>
-        <th>投稿者名</th>
         <th>料理名</th>
+        <th>投稿者名</th>
         
       </tr>
     </thead>
@@ -20,12 +20,13 @@
           <td><%= link_to cooking_path(bookmark.cooking) do %>
                 <%= image_tag bookmark.cooking.image %>
               <% end %></td>
-          <td><%= bookmark.cooking.member.name %></td>
-          <td>
+              <td>
             <%= link_to cooking_path(bookmark.cooking) do %>
               <%= bookmark.cooking.name %>
             <% end %>
           </td>
+          <td><%= bookmark.cooking.member.name %></td>
+          
           
         </tr>
       <% end %>
