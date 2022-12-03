@@ -11,6 +11,7 @@ Admin.create!(
 )
 
 Member.create!(
+  name: 'あああ',
   email: 'admin@admin',
   password: 'testtest'
 )
@@ -24,6 +25,7 @@ Cooking.create!([
   {
     member_id: 1,
     tag_id: 1,
+     
     name: 'とろろそば',
     introduction: 'とろろ'
   },
