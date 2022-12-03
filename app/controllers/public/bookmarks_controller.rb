@@ -3,6 +3,7 @@ class Public::BookmarksController < ApplicationController
   
   def index
     @bookmarks = Bookmark.where(member_id: current_member.id)
+    @cooking = Cooking.find(params[:cooking_id])
   end
   
   def create
