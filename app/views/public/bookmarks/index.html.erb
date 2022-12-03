@@ -17,10 +17,15 @@
     <tbody>
       <% @bookmarks.each do |bookmark| %>
         <tr style="line-height:50px;">
-          <td><%= link_to cooking_path(bookmark.cooking) do %>
-                <%= image_tag bookmark.cooking.image %>
-              <% end %></td>
-              <td>
+          <td>
+            <%= link_to cooking_path(bookmark.cooking) do %>
+            <% if cooking.image.attached? %>
+              <%= image_tag bookmark.cooking.image %>
+            <% else %>
+              <%= image_tag asset_path("default-image.jpg"), :size =>'100x100' %>
+            <% end %>
+          </td>
+          <td>
             <%= link_to cooking_path(bookmark.cooking) do %>
               <%= bookmark.cooking.name %>
             <% end %>
