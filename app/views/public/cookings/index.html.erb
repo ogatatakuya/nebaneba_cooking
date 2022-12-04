@@ -6,8 +6,9 @@
   </div>
   <div class="row mt-4">
     <div class="col-md-10". style="display:flex;">
-      <span style="padding-right:100px;"><h1><%= link_to "+", new_cooking_path %></h1></span>
       <% if member_signed_in? %>
+      <span style="padding-right:100px;"><h1><%= link_to "+", new_cooking_path %></h1></span>
+      
         <div class="search-form">
           <%= form_with url: search_path, method: :get, local: true do |f| %>
             <%= f.label :keyword, "キーワード検索" %>
