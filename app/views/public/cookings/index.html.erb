@@ -30,11 +30,11 @@
     </div>
   </div>
   <div class="row mt-5">
-    <div class="col-lg-12" >
+    <div class="col-lg-11" >
       <div style="display:flex; flex-wrap: wrap;">
       
        <% @cookings.each do |cooking| %>
-        <div style="padding-left:40px; padding-right:40px; display:flex;">
+        <div style="margin-left:20px; margin-right:50px; display:flex;">
           <div>
             <%= link_to cooking_path(cooking.id) do %>
               <% if cooking.image.attached? %>
@@ -45,10 +45,13 @@
               <h4><%= cooking.name %></h4>
             <% end %>
           </div>
-            <h6><p><%= cooking.member.name %><p></h6></br>
+          <div style="margin-top:50px; margin-left:10px;">
+            
+            <p><%= cooking.member.name %><p>
             <%#= Tag.where(id: cooking.tag_id).first.name %>
              <%#= cooking.tag.inspect %>
-               <h6><p><%= cooking.tag.name %></p></h6>
+            <p><%= cooking.tag.name %></p>
+          </div>
         </div> 
        <% end %>
       </div>
