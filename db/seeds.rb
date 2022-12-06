@@ -23,6 +23,7 @@ Tag.create!([
 
 Cooking.create!([
   {
+    cooking_id: 1,
     member_id: 1,
     tag_id: 1,
      
@@ -30,6 +31,7 @@ Cooking.create!([
     introduction: 'とろろ'
   },
   {
+    cooking_id: 2,
     member_id: 1,
     tag_id: 2,
     name: '納豆パスタ',
